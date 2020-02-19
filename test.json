@@ -234,10 +234,6 @@
           "computerName": "[concat(parameters('projectName'),'-vm', copyIndex(1))]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]",
-          "windowsConfiguration": {
-            "enableAutomaticUpdates": true,
-            "provisionVmAgent": true
-          }
         }
       }
     },
@@ -298,27 +294,5 @@
         }
       }
     },
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "apiVersion": "2018-10-01",
-      "name": "[concat(parameters('projectName'),'-vm', copyIndex(1), '/', 'InstallWebServer')]",
-      "location": "[parameters('location')]",
-      "copy": {
-        "name": "extensionCopy",
-        "count": 3
-      },
-      "dependsOn": [
-        "vmCopy"
-      ],
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.7",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "commandToExecute": "powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools && powershell.exe remove-item 'C:\\inetpub\\wwwroot\\iisstart.htm' && powershell.exe Add-Content -Path 'C:\\inetpub\\wwwroot\\iisstart.htm' -Value $('Hello World from ' + $env:computername)"
-        }
-      }
-    }
   ]
 }
