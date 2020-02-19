@@ -199,28 +199,27 @@
  				},
  				"storageProfile": {
  					"osDisk": {
- 						"createOption": "fromImage",
- 						"managedDisk": {
- 							"storageAccountType": "[parameters('vmStorageAccountType')]"
- 						}
- 					},
- 					"imageReference": {
- 						"publisher": "Canonical",
- 						"offer": "UbuntuServer",
- 						"sku": "18.04-LTS",
- 						"version": "latest"
+ 						"name": "[concat(parameters('projectName'),'-vm', copyIndex(1))]",
+ 						"caching": "ReadWrite",
+ 						"createOption": "FromImage"
  					}
  				},
- 				"networkProfile": {
- 					"networkInterfaces": [{
- 						"id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('projectName'),'-vm', copyIndex(1), '-networkInterface'))]"
- 					}]
- 				},
- 				"osProfile": {
- 					"computerName": "[concat(parameters('projectName'),'-vm', copyIndex(1))]",
- 					"adminUsername": "[parameters('adminUsername')]",
- 					"adminPassword": "[parameters('adminPassword')]"
+ 				"imageReference": {
+ 					"publisher": "Canonical",
+ 					"offer": "UbuntuServer",
+ 					"sku": "18.04-LTS",
+ 					"version": "latest"
  				}
+ 			},
+ 			"networkProfile": {
+ 				"networkInterfaces": [{
+ 					"id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('projectName'),'-vm', copyIndex(1), '-networkInterface'))]"
+ 				}]
+ 			},
+ 			"osProfile": {
+ 				"computerName": "[concat(parameters('projectName'),'-vm', copyIndex(1))]",
+ 				"adminUsername": "[parameters('adminUsername')]",
+ 				"adminPassword": "[parameters('adminPassword')]"
  			}
  		},
  		{
