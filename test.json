@@ -201,7 +201,7 @@
  					"osDisk": {
  						"createOption": "fromImage",
  						"managedDisk": {
- 							"storageAccountType": "[parameters('osDiskType')]"
+ 							"storageAccountType": "[parameters('vmStorageAccountType')]"
  						}
  					},
  					"imageReference": {
