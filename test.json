@@ -294,6 +294,6 @@
           "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
         }
       }
-    },
+    }
     ]
 }
