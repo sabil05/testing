@@ -211,14 +211,7 @@
  					"version": "latest"
  				}
  			},
- 			"networkProfile": {
- 				"networkInterfaces": [
-      {
- 					"id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('projectName'),'-vm', copyIndex(1), '-networkInterfaces'))]"
- 				}
-     ]
- 			},
- 			"osProfile": {
+ 				"osProfile": {
  				"computerName": "[concat(parameters('projectName'),'-vm', copyIndex(1))]",
  				"adminUsername": "[parameters('adminUsername')]",
  				"adminPassword": "[parameters('adminPassword')]"
@@ -274,7 +267,12 @@
  				}],
  				"networkSecurityGroup": {
  					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
- 				}
+ 				},
+ 				"networkProfile": {
+ 				"networkInterfaces": [{
+ 					"id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('projectName'),'-vm', copyIndex(1), '-networkInterfaces'))]"
+ 				}]
+ 			}
  			}
  		}
  	]
