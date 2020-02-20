@@ -1,4 +1,4 @@
-  {
+{
   	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   	"contentVersion": "1.0.0.0",
   	"parameters": {
@@ -273,6 +273,27 @@
   					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
   				}
   			}
-  		}
+  		},
+        {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('projectName'),'-vm', copyIndex(1)),'/newuserscript')]"
+      "apiVersion": "2015-05-01-preview",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat(parameters('projectName'),'-vm', copyIndex(1))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.0",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            ["https://github.com/sabil05/testing/blob/master/install_httpd.sh"],
+          ],
+          "commandToExecute": "sh install_httpd.sh"
+        }
+    }
+}
   	]
   }
