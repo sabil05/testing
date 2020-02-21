@@ -63,7 +63,16 @@
 		"vNetSubnetName": "BackendSubnet",
 		"vNetSubnetAddressPrefix": "10.0.1.0/24",
 		"vmSize": "Standard_DS1_v2",
-		"vmStorageAccountType": "Premium_LRS"
+		"vmStorageAccountType": "Premium_LRS",
+		"linuxConfiguration": {
+			"disablePasswordAuthentication": true,
+			"ssh": {
+				"publicKeys": [{
+					"path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
+					"keyData": "[parameters('adminPasswordOrKey')]"
+				}]
+			}
+		}
 	},
 	"resources": [{
 			"type": "Microsoft.Network/loadBalancers",
@@ -229,10 +238,7 @@
 					"computerName": "[concat(parameters('projectName'),'-vm', copyIndex(1))]",
 					"adminUsername": "[parameters('adminUsername')]",
 					"adminPassword": "[parameters('adminPasswordOrKey')]",
-					"linuxConfiguration": {
-						"disablePasswordAuthentication": false
-					},
-					"secrets": []
+					"linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
 				}
 			}
 		},
