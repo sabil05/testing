@@ -288,6 +288,31 @@
 					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
 				}
 			}
+		},
+		{
+			"type": "Microsoft.Compute/virtualMachines/extensions",
+			"apiVersion": "2018-10-01",
+			"name": "[concat(parameters('projectName'),'-vm', copyIndex(1), '/', 'InstallWebServer')]",
+			"location": "[parameters('location')]",
+			"copy": {
+				"name": "extensionCopy",
+				"count": 3
+			},
+			"dependsOn": [
+				"vmCopy"
+			],
+			"properties": {
+				"publisher": "Microsoft.Compute",
+				"type": "CustomScriptExtension",
+				"typeHandlerVersion": "1.7",
+				"autoUpgradeMinorVersion": true,
+				"settings": {
+					"fileUris": [
+						["https://github.com/sabil05/testing/blob/master/install_httpd.sh"]
+					],
+					"commandToExecute": "sh install_httpd.sh"
+				}
+			}
 		}
 	]
 }
