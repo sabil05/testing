@@ -1,8 +1,8 @@
 #!/bin/bash
-apt-get -y update
+sudo apt-get -y update
 
 # install HTTP
-apt-get -y install nginx
+sudo apt-get -y install nginx
 
 # write some HTML
 echo \<center\>\<h1\>My Demo App\</h1\>\<br/\>\</center\> > /var/www/html/demo.html
