@@ -63,19 +63,7 @@
 		"vNetSubnetName": "BackendSubnet",
 		"vNetSubnetAddressPrefix": "10.0.1.0/24",
 		"vmSize": "Standard_DS1_v2",
-		"vmStorageAccountType": "Premium_LRS",
-		"linuxConfiguration": {
-			"disablePasswordAuthentication": true, 
-			"ssh": {
-			       "publicKeys": [
-				       {
-					       "path": "/home/mohammed/.ssh/authorized_keys",
-					       "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUmCVXeyhSPVVzOIeewU+mVQsqk7LpU+9yqtkAnsPfGnvGr9YuqQr7VY1EU9kYCo8ftGyoVyy3XIbGaK7v5obKw4qcE2o9d9kSKDJqc3t5uXhG3hyVbhPEwh5TkZxD/6uCY/vMDi/7WiQ71bMBc+rrC408zFA/N6kSER0wAlcEBAffrjKfrjkKkqIholToI7ZTStRD+76ul3TX033gnBX7XfxzL2aFX2kTXEysL9WLr5Yqv3AVGSfP5tupKM4vfVZ1ZQrpvTNPMBFXREadiMfbybG8MFbEdunFjzsWvFeNSLdVkfxyzeb8++f3ZJlqF3zMjAcI8U2UMCpqQoCTUw5L mohammed@cc-157527a3-5d586c9c55-bmgj7"
-				       }
-				       ]
-			}
-		},
-		"secrets": []
+		"vmStorageAccountType": "Premium_LRS"
 	},
 	"resources": [{
 			"type": "Microsoft.Network/loadBalancers",
@@ -241,7 +229,10 @@
 					"computerName": "[concat(parameters('projectName'),'-vm', copyIndex(1))]",
 					"adminUsername": "[parameters('adminUsername')]",
 					"adminPassword": "[parameters('adminPasswordOrKey')]",
-					"linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+					"linuxConfiguration": {
+						"disablePasswordAuthentication": false
+					},
+					"secrets": []
 				}
 			}
 		},
