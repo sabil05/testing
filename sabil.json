@@ -147,7 +147,7 @@
 						"name": "default-allow-rdp",
 						"properties": {
 							"priority": 1000,
-							"protocol": "TCP",
+							"protocol": "Tcp",
 							"access": "Allow",
 							"direction": "Inbound",
 							"sourceAddressPrefix": "*",
@@ -205,7 +205,7 @@
 						"version": "latest"
 					},
 					"osDisk": {
-						"createOption": "fromImage",
+						"createOption": "FromImage",
 						"caching": "ReadWrite"
 					}
 				},
