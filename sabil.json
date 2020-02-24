@@ -293,9 +293,9 @@
 				"autoUpgradeMinorVersion": true,
 				"settings": {
 					"fileUris": [
-						["https://github.com/sabil05/testing/blob/master/install_httpd.sh"]
+						["https://raw.githubusercontent.com/sabil05/testing/master/install_httpd.sh"]
 					],
-					"commandToExecute": "sh install_httpd.sh"
+					"commandToExecute": "sudo sh install_httpd.sh"
 				}
 			}
 		}
