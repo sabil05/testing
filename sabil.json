@@ -295,7 +295,9 @@
 					"fileUris": [
 						["https://raw.githubusercontent.com/sabil05/testing/master/install_httpd.sh"]
 					],
+				"protectedSettings": {
 					"commandToExecute": "sudo sh install_httpd.sh"
+				}
 				}
 			}
 		}
